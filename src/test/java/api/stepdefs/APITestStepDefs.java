@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.testng.Assert;
+import org.junit.Assert;
 
 import java.util.List;
 import java.util.Map;
