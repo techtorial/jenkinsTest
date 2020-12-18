@@ -10,7 +10,6 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
