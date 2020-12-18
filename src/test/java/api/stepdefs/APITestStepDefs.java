@@ -1,12 +1,16 @@
 package api.stepdefs;
 
 import api.pojo.PetPojo;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +20,20 @@ public class APITestStepDefs {
 
     Response response;
 
+
+    @Given("pet is created with following info")
+    public void pet_is_created(DataTable table) {
+        RestAssured.baseURI = "https://petstore.swagger.io";
+
+        Map<String, String> payloadMap = table.asMaps().get(0);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payloadMap).when().post("v2/pet")
+                .then().statusCode(200).log().all();
+    }
+
     @When("user executes {string} request")
     public void user_executes_request(String request) {
         response = given().accept(ContentType.JSON).when()
-                .get("https://petstore.swagger.io/v2/pet/8787");
+                .get("v2/pet/8787");
     }
 
     @Then("status code is {int}")
