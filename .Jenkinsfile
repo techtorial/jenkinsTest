@@ -1,7 +1,7 @@
 pipeline {
 agent any
 environment {
-    MAVEN_HOME=/opt/maven
+    MAVEN_HOME="/opt/maven"
     PATH="$PATH:$MAVEN_HOME/bin"
 }
 stages {
