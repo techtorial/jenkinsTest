@@ -1,0 +1,68 @@
+pipeline {
+agent any
+environment {
+        PATH="$PATH:/opt/maven/bin"
+    }
+stages {
+        stage('Deploy to QA') {
+            steps {
+                echo "Deploying to QA env"
+                sleep 10
+            }
+        }
+        stage('Smoketest QA') {
+            steps {
+                echo "Running Smoketest for QA env"
+                sleep 10
+            }
+        }
+        stage('Deploy to QA-1') {
+            steps {
+                echo "Deploying to QA-1 env"
+                sleep 10
+            }
+        }
+        stage('Smoketest QA-1') {
+            steps {
+                echo "Running Smoketest for QA-1 env"
+                sleep 10
+            }
+        }
+        stage('Deploy to STG env') {
+            steps {
+                echo "Deploying to STG env"
+                sleep 10
+            }
+        }
+        stage('Smoketest STG') {
+            steps {
+                echo "Running Smoketest for STG env"
+                sleep 10
+            }
+        }
+        stage('Deploy to STG-1 env') {
+            steps {
+                echo "Deploying to STG-1 env"
+                sleep 10
+            }
+        }
+        stage('Smoketest STG-1') {
+            steps {
+                echo "Running Smoketest for STG-1 env"
+                sleep 10
+            }
+        }
+        stage('Deploy to PRD') {
+            steps {
+                echo "Deploying to PRD env"
+                sleep 10
+            }
+        }
+        stage('Smoketest PRD') {
+            steps {
+                echo "Running Smoketest for PRD env"
+                sleep 10
+            }
+        }
+    }
+}

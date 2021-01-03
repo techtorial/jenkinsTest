@@ -21,10 +21,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Assert;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,21 +34,29 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class APITestStepDefs {
+    {
+        String log4jConfPath = "log4j.properties";
+        PropertyConfigurator.configure(log4jConfPath);
+    }
 
-    Response response;
-    HttpClient client = HttpClientBuilder.create().build();
-    URIBuilder uriBuilder = new URIBuilder();
-    ObjectMapper objectMapper = new ObjectMapper();
-    HttpResponse httpResponse;
-    int petId = 878700;
-    String petName = "TRex";
-    String petStatus = "do not touch";
+    private final Logger LOG = LogManager.getLogger(APITestStepDefs.class);
+
+    private Response response;
+    private HttpClient client = HttpClientBuilder.create().build();
+    private URIBuilder uriBuilder = new URIBuilder();
+    private ObjectMapper objectMapper = new ObjectMapper();
+    private HttpResponse httpResponse;
+    private int petId = 878700;
+    private String petName = "TRex";
+    private String petStatus = "do not touch";
 
 
     @Given("pet is created with following info")
     public void pet_is_created(DataTable table) {
+        LOG.info("Creating a pet");
         RestAssured.baseURI = "https://petstore.swagger.io";
 
         Map<String, String> payloadMap = table.asMaps().get(0);
@@ -56,8 +66,8 @@ public class APITestStepDefs {
 
     @When("user executes {string} request")
     public void user_executes_request(String request) {
-        response = given().accept(ContentType.JSON).when()
-                .get("v2/pet/8787");
+        response = given().accept(ContentType.JSON).when().get("v2/pet/8787");
+        LOG.info("Get request is executed");
     }
 
     @Then("status code is {int}")
@@ -67,7 +77,7 @@ public class APITestStepDefs {
 
     @Then("pet has following attributes")
     public void pet_has_following_attributes(io.cucumber.datatable.DataTable dataTable) {
-
+        LOG.info("Verifying pet attributes");
         PetPojo parsedPet = response.as(PetPojo.class);
         List<Map<String, String>> maps = dataTable.asMaps();
         Map<String, String> petData = maps.get(0);
@@ -82,8 +92,8 @@ public class APITestStepDefs {
 
     @When("pet is created")
     public void createPetTest() throws URISyntaxException, IOException {
+        LOG.info("Pet is created");
         client = HttpClientBuilder.create().build();
-
         uriBuilder.setScheme("https").setHost("petstore.swagger.io").setPath("v2/pet");
 
         HttpPost httpPost = new HttpPost(uriBuilder.build());
@@ -117,9 +127,7 @@ public class APITestStepDefs {
         httpResponse = client.execute(httpPost);
 
         assertEquals(httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
-        Assert.assertTrue(httpResponse.getEntity().getContentType().getValue().contains("application/json"));
-
-
+        assertTrue(httpResponse.getEntity().getContentType().getValue().contains("application/json"));
     }
 
     @And("pet must have following attributes")
@@ -128,8 +136,6 @@ public class APITestStepDefs {
         Map<String, Object> deserializedResponse = objectMapper.readValue(httpResponse.getEntity().getContent(),
                 new TypeReference<Map<String, Object>>() {
                 });
-
-
         String actualPetName = (String) deserializedResponse.get("name");
         int actualPetId = (int) deserializedResponse.get("id");
         String actualPetStatus = (String) deserializedResponse.get("status");
@@ -179,7 +185,7 @@ public class APITestStepDefs {
 
         httpResponse = client.execute(get);
         Assert.assertEquals(httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
-        Assert.assertTrue(httpResponse.getEntity().getContentType().getValue().contains("application/json"));
+        assertTrue(httpResponse.getEntity().getContentType().getValue().contains("application/json"));
 
         List<Map<String, Object>> deserilizedRespList = objectMapper.readValue(httpResponse.getEntity().getContent(), new TypeReference<List<Map<String, Object>>>() {
         });
@@ -191,8 +197,6 @@ public class APITestStepDefs {
             characterNames.add(map.get("name").toString());
         }
 
-        Assert.assertTrue(characterNames.size() > 100);
-
+        assertTrue(characterNames.size() > 100);
     }
-
 }
