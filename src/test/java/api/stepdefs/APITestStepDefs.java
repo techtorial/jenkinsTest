@@ -57,7 +57,6 @@ public class APITestStepDefs {
     @Given("pet is created with following info")
     public void pet_is_created(DataTable table) {
         LOG.info("Creating a pet");
-        RestAssured.baseURI = "https://petstore.swagger.io";
 
         Map<String, String> payloadMap = table.asMaps().get(0);
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payloadMap).when().post("v2/pet")
@@ -65,7 +64,8 @@ public class APITestStepDefs {
     }
 
     @When("user executes {string} request")
-    public void user_executes_request(String request) {
+    public void user_executes_request(String request) throws InterruptedException {
+        Thread.sleep(2000);
         response = given().accept(ContentType.JSON).when().get("v2/pet/8787");
         LOG.info("Get request is executed");
     }
