@@ -1,4 +1,4 @@
-@get
+@custom
 Feature: Techtorial First test
 
 
