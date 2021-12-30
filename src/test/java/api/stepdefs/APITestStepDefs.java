@@ -61,7 +61,7 @@ public class APITestStepDefs {
 
         Map<String, String> payloadMap = table.asMaps().get(0);
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payloadMap).when().post("v2/pet")
-                .then().statusCode(200).log().all();
+                .then().statusCode(500).log().all();
     }
 
     @When("user executes {string} request")
