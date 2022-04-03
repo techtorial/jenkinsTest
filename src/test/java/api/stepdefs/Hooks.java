@@ -17,5 +17,8 @@ public class Hooks {
         System.out.println("After hook has been executed");
     }
 
+@Before
+    public void setup2(){
 
+}
 }
