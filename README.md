@@ -4,7 +4,6 @@
 ## Jenkins basic pipeline 
 Basic pipeline is built using the pipeline plugin from jeknins job configurations
 
-
 ## Jenkins scripted pipeline
 Scripted pipeline configured in .JenkinsFile
 
@@ -16,3 +15,4 @@ Run using maven:
 mvn test -Dtest=APITestRunner.java
 
 ```
+
