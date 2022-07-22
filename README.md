@@ -9,6 +9,8 @@ Basic pipeline is built using the pipeline plugin from jeknins job configuration
 Scripted pipeline configured in .JenkinsFile
 
 
+
+
 ## How to run
 Update the `credentials.properties` file with valid credentials.
 Run using maven: 
