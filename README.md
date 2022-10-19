@@ -3,7 +3,6 @@
 
 
 
-
 ## Jenkins basic pipeline 
 Basic pipeline is built using the pipeline plugin from jeknins job configurations
 
