@@ -1,4 +1,4 @@
-@get
+@custom
 Feature: Techtorial  Second test
 
   Scenario: Techtorial First scenario

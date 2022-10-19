@@ -7,7 +7,6 @@ import io.cucumber.java.Before;
  */
 public class Hooks {
 
-
     @Before
     public void setup() {
         System.out.println("Before hook has been executed");
@@ -18,5 +17,8 @@ public class Hooks {
         System.out.println("After hook has been executed");
     }
 
+@Before
+    public void setup2(){
 
+}
 }
