@@ -20,7 +20,7 @@ public class TechtorialTestSteps {
     @When("first test executed")
     public void first_test_executed() {
         LOG.info("First step executed");
-        waitFor2Se();
+        waitFor2Sec();
     }
 
     @Then("do verification")
