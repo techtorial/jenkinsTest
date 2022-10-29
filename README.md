@@ -4,8 +4,13 @@
 ## Jenkins basic pipeline 
 Basic pipeline is built using the pipeline plugin from jeknins job configurations
 
+
+## Jenkins basic pipeline 
+Basic pipeline is built using the pipeline plugin from jeknins job configurations
+
 ## Jenkins scripted pipeline
 Scripted pipeline configured in .JenkinsFile
+
 
 ## How to run
 Update the `credentials.properties` file with valid credentials.
