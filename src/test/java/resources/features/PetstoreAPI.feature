@@ -7,7 +7,7 @@ Feature: Test Petstore APIs
       | Hutch | 8787 | good pet |
     When user executes "GET" request
     Then status code is 200
-    And pet has following attributes
+    And pet has folowing attributes
       | petName | petId | petStatus |
       | Hutch   | 8787  | good pet  |
 

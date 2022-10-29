@@ -61,7 +61,7 @@ public class APITestStepDefs {
 
         Map<String, String> payloadMap = table.asMaps().get(0);
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(payloadMap).when().post("v2/pet")
-                .then().statusCode(200).log().all();
+                .then().statusCode(200).log().body();
     }
 
     @When("user executes {string} request")
@@ -140,7 +140,7 @@ public class APITestStepDefs {
         int actualPetId = (int) deserializedResponse.get("id");
         String actualPetStatus = (String) deserializedResponse.get("status");
 
-        assertEquals(actualPetId, petId);
+        assertEquals(actualPetId+1, petId);
         assertEquals(actualPetName, petName);
         assertEquals(actualPetStatus, petStatus);
     }
@@ -197,6 +197,6 @@ public class APITestStepDefs {
             characterNames.add(map.get("name").toString());
         }
 
-        assertTrue(characterNames.size() > 100);
+        assertTrue(characterNames.size() < 10);
     }
 }
